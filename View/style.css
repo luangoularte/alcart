@@ -93,3 +93,17 @@ body {
 .form-login_view button:hover {
     background-color: #c0a8a8;
 }
+
+.alert-success {
+    background: #C5E1A5;
+        margin: 4px;
+        padding: 12px;
+        color: #7CB342;
+}
+
+.alert-error {
+    background: #FFAB91;
+        margin: 4px;
+        padding: 12px;
+        color: #F4511E;
+}
