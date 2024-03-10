@@ -49,6 +49,10 @@ class Produto{
         return $this->cidade;
     }
 
+    public function getQuantidade() {
+        return $this->quantidade;
+    }
+
     public function getData() {
         return $this->data;
     }

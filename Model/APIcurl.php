@@ -33,7 +33,7 @@ class APIcurl {
 
     public function requisicaoProduto(){
 
-        $url = "https://ah.we.imply.com/al/login";
+        $url = "https://ah.we.imply.com/al/produto";
 
         $curl = curl_init($url);
 
@@ -49,6 +49,9 @@ class APIcurl {
         return $decoded;
     }
 }
+
+//$teste = (new APIcurl)->requisicaoProduto();
+//var_dump($teste);
 
 ?>
 

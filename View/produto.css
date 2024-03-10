@@ -1,0 +1,86 @@
+* {
+    margin:0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 16px;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/cine(red).jpg");
+    filter: blur(2px); 
+    z-index: -1;
+}
+
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: block;
+    background-color: #fff;
+    /* height: 260px; */
+    border-radius: 12px;
+    width: calc(25% - 20px); 
+    margin: 10px;
+    /*box-shadow*/
+}
+
+
+
+
+.card img {
+    width: 100%;
+    height: 130px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+
+.card div {
+display: flex;
+flex-direction: column;
+justify-content: center;
+text-align: center;
+
+}
+
+.card h1{
+    font-size: .9rem;
+}
+
+.card h2{
+    font-size: .9rem;
+    color: darkgreen;
+}
+
+.card button {
+    background-color: #49586f;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+    width: 80%;
+    color: #141414;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transition: background 0.3s;
+}
+
+.card button:hover {
+    background-color: #c0a8a8;
+}

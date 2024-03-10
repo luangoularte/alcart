@@ -5,6 +5,7 @@ class Carrinho {
 
     public function add(Produto $produto){
         $NoCarrinho = false;
+        $this->setTotal($produto);
         if (count($this->getCarrinho()['produtos']) > 0) {
             foreach ($this->getCarrinho()['produtos'] as $produtoNoCarrinho) {
                 if ($produtoNoCarrinho->getId() === $produto->getId()){
@@ -15,7 +16,20 @@ class Carrinho {
                 }
             }
         }
+
+        if (!$NoCarrinho) {
+            $this->setProdutosNoCarrinho($produto);
+        }
     }
+
+    private function setProdutosNoCarrinho($produto) {
+        $this->getCarrinho()['produtos'][] = $produto;
+    }
+
+    private function setTotal(Produto $produto) {
+        $this->getCarrinho()['total'] += $produto->getPreco() * $produto->getQuantidade();
+    }
+
     public function remove(){
 
     }
