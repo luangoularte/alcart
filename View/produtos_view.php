@@ -71,7 +71,21 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
 <body>
     
     <header>
-        <a href="carrinho_view.php">CARRINHO</a>
+        <a href="produtos_view.php">
+            <img src="/images/ALlogo(3).png" alt="logo ALcart">
+        </a>
+        
+        <a href="login_view.php">
+            <img class="image" src="/images/login_sair.png" alt="login sair img">
+        </a>
+        
+        <a href="login_view.php">
+            <img class="image" src="/images/login.png" alt="login img">
+        </a>
+
+        <a href="carrinho_view.php">
+            <img class="image" src="/images/cart.png" alt="cart img" >
+        </a>
     </header>
 
     <div class='session'>
