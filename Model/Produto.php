@@ -2,30 +2,30 @@
 
 class Produto{
 
-    private int $id;
+    private string $id;
     private string $dscproduto; // inteira, meiaa
-    private float $preco;
+    private string $preco;
     private string $cidade;
     private int $quantidade;
-    private $data;
+    private string $data;
 
-    public function setId($id) {
+    public function setId(string $id) {
         $this->id = $id;
     }
 
-    public function setDscproduto($dscproduto) {
+    public function setDscproduto(string $dscproduto) {
         $this->dscproduto = $dscproduto;
     }
     
-    public function setPreco($preco) {
+    public function setPreco(string $preco) {
         $this->preco = $preco;
     }
 
-    public function setCidade($cidade) {
+    public function setCidade(string $cidade) {
         $this->cidade = $cidade;
     }
 
-    public function setQuantidade($quantidade) {
+    public function setQuantidade(int $quantidade) {
         $this->quantidade = $quantidade;
     }
 

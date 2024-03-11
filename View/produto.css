@@ -84,3 +84,41 @@ text-align: center;
 .card button:hover {
     background-color: #c0a8a8;
 }
+
+
+
+/* css caixa ingressos */
+
+.caixa-ingressos {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 400px;
+    z-index: 999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.caixa-ingressos h2 {
+    margin-top: 0;
+}
+
+.caixa-ingressos p {
+    margin-bottom: 5px;
+}
+
+.caixa-ingressos .fechar {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.session {
+    color: #fff;
+   
+}

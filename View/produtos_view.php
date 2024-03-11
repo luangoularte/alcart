@@ -1,11 +1,16 @@
 <?php 
 require __DIR__ . "/../Model/APIcurl.php";
+require __DIR__ . "/../Model/Carrinho.php";
+require __DIR__ . "/../Model/Produto.php";
+
+session_start();
 
 $apresentacoes = (new APIcurl)->requisicaoProduto();
 
 //var_dump($apresentacoes);
 
 $apresentacoesUnicas = array();
+
 
 foreach ($apresentacoes['result'] as $apresentacao) {
     $id = $apresentacao['idapresentacao'];
@@ -15,6 +20,35 @@ foreach ($apresentacoes['result'] as $apresentacao) {
 
     $apresentacoesUnicas[$id][] = $apresentacao;
 }
+
+//var_dump($apresentacoesUnicas);
+
+if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
+    $idProduto = strip_tags($_GET['idProduto']);
+    $idApresentacao = strip_tags($_GET['idApresentacao']);
+    foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
+        if ($apresentacao['idproduto'] === $idProduto) {
+
+            $produto = new Produto;
+            $produto->setId($apresentacao['idproduto']);
+            $produto->setDscproduto($apresentacao['dscproduto']);
+            $produto->setPreco($apresentacao['preco']);
+            $produto->setCidade($apresentacao['dsccidade']);
+            $produto->setQuantidade(1);
+            $produto->setData($apresentacao['dthr_apresentacao']);
+
+            $carrinho = new Carrinho;
+            $carrinho->add($produto);
+
+            break;
+        }
+    }
+    unset($_GET['idProduto']);
+    unset($_GET['idApresentacao']);
+}
+
+
+
 
 ?>
 
@@ -28,7 +62,12 @@ foreach ($apresentacoes['result'] as $apresentacao) {
     <link rel="stylesheet" href="produto.css">
     <title>Produtos</title>
 </head>
+    
 <body>
+    <div class='session'>
+        <?php var_dump($_SESSION['carrinho'] ?? []);?>
+    </div>
+
     <div class="card-container">
         <?php 
             $total_cartoes = 8;
@@ -40,10 +79,16 @@ foreach ($apresentacoes['result'] as $apresentacao) {
 
                 echo '<div class="card">';
                 echo '<img src="' . $apresentacao['imagem_pequena'] . '" alt="Imagem da Apresentação">';
-                echo "<h1><strong>Nome:</strong> " . $apresentacao['dscapresentacao'] . "<h1>";
+                echo "<h1><strong>Nome:</strong> " . $apresentacao['dscapresentacao'] . "</h1>";
                 echo "<h2><strong>Data:</strong> " . $apresentacao['dthr_apresentacao'] . "</h2>";
                 echo "<h2><strong>Cidade:</strong> " . $apresentacao['dsccidade'] . "</h2>";
-                echo "<p><button>Comprar</button></p>";
+
+                echo '<form action="" method="post">';
+                echo '<input type="hidden" name="idapresentacao" value="'. $idapresentacao .'">';
+                echo '<input type="submit" name="comprar" value="Comprar">';
+                echo '</form>';
+                
+
                 echo '</div>';
 
                 $cartoes_exibidos++;
@@ -56,9 +101,26 @@ foreach ($apresentacoes['result'] as $apresentacao) {
                     break;
                 }
             }
+
+            if (isset($_POST["comprar"])) {
+                $idapresentacao = $_POST['idapresentacao'];
+
+                echo '<div class="caixa-ingressos">';
+                echo '<span class="close-btn" onclick="this.parentElement.style.display=\'none\'">&times;</span>';
+                echo '<h2>Detalhes do Ingresso</h2>';
+                foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
+                    $idproduto = $apresentacoes['idproduto'];
+                    echo "<p>" . $apresentacoes['dscproduto'] . ": " . $apresentacoes['preco'] .  "</p>";
+                    echo "<button><a href='?idProduto=$idproduto&idApresentacao=$idapresentacao'>Adicionar</a></button>";
+                }
+                echo '</div>';
+            }
         ?>
+
+        
+        
+        
+        
     </div>
-    
-    
 </body>
 </html>
