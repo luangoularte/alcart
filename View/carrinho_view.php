@@ -23,6 +23,7 @@ session_start();
     <div class='session'><?php var_dump($_SESSION['carrinho']['produtos'] ?? []); ?></div>
 
     <div class="carrinho">
+        
         <?php 
             if (empty($_SESSION['carrinho']['produtos'])) {
                 echo 'Carrinho vazio';

@@ -1,0 +1,30 @@
+body {
+    background-color: #1e202d;
+    background-size: cover; 
+    background-attachment: fixed; 
+}
+
+header {
+    box-shadow: 0px 0px 20px rgba(155, 151, 151, 0.1);
+    background: #fff;
+    position: fixed;
+    width: 100%;
+    top: 0; 
+    padding: 10px;
+}
+
+header img {
+    max-width: 150px; 
+    height: auto;
+    display: block; 
+    margin: 0 auto;
+    /* display: inline-block; */
+    float: left;
+}
+
+.image {
+    max-width: 57px;
+    /* display: inline-block; */
+    float: right;
+    margin-right: 20px;
+}
