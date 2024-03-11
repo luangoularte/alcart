@@ -26,6 +26,7 @@ foreach ($apresentacoes['result'] as $apresentacao) {
 if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
     $idProduto = strip_tags($_GET['idProduto']);
     $idApresentacao = strip_tags($_GET['idApresentacao']);
+    
     foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
         if ($apresentacao['idproduto'] === $idProduto) {
 
@@ -36,15 +37,19 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
             $produto->setCidade($apresentacao['dsccidade']);
             $produto->setQuantidade(1);
             $produto->setData($apresentacao['dthr_apresentacao']);
+            $produto->setImagem($apresentacao['imagem_pequena']);
+            $produto->setDscapresentacao($apresentacao['dscapresentacao']);
 
             $carrinho = new Carrinho;
             $carrinho->add($produto);
 
-            break;
+            //break;
         }
     }
     unset($_GET['idProduto']);
     unset($_GET['idApresentacao']);
+
+    header('Location: http://localhost:8080/View/produtos_view.php');
 }
 
 
@@ -64,8 +69,14 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
 </head>
     
 <body>
+    
+    <header>
+        <a href="carrinho_view.php">CARRINHO</a>
+    </header>
+
     <div class='session'>
-        <?php var_dump($_SESSION['carrinho'] ?? []);?>
+            <?php var_dump($_SESSION['carrinho'] ?? []); ?>
+
     </div>
 
     <div class="card-container">

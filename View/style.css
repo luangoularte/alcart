@@ -13,7 +13,7 @@ body {
     float: left;
     width: 70%;
     height: 95vh; 
-    background-image: url('/images/ALlogo(3).png'); 
+    background-image: url('/images/cine(red).jpg'); 
     background-size: cover;
     animation: Animation 10s infinite alternate;
 }
@@ -25,13 +25,13 @@ body {
 /* https://bennettfeely.com/clippy/ */
 @keyframes Animation {
     0% {
-        clip-path: polygon(50% 0%, 0 65%, 90% 90%);
+        clip-path: polygon(64% 19%, 0 79%, 96% 75%);
     }
     50% {
         clip-path: polygon(53% 14%, 0, 87%, 94% 54%);
     }
     100% {
-        clip-path: polygon(64% 19%, 0 79%, 96% 75%);
+        clip-path: polygon(50% 0%, 0 65%, 90% 90%);
     }
 }
 

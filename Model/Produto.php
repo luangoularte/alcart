@@ -8,6 +8,8 @@ class Produto{
     private string $cidade;
     private int $quantidade;
     private string $data;
+    private string $imagem;
+    private string $dscapresentacao;
 
     public function setId(string $id) {
         $this->id = $id;
@@ -31,6 +33,14 @@ class Produto{
 
     public function setData($data) {
         $this->data = $data;
+    }
+
+    public function setImagem(string $imagem) {
+        $this->imagem = $imagem;
+    }
+
+    public function setDscapresentacao($dscapresentacao) {
+        $this->dscapresentacao = $dscapresentacao;
     }
 
     public function getId() {
@@ -57,6 +67,13 @@ class Produto{
         return $this->data;
     }
 
+    public function getImagem() {
+        return $this->imagem;
+    }
+
+    public function getDscapresentacao() {
+        return $this->dscapresentacao;
+    }
 
 
 
