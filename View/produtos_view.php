@@ -7,7 +7,6 @@ session_start();
 
 $apresentacoes = (new APIcurl)->requisicaoProduto();
 
-//var_dump($apresentacoes);
 
 $apresentacoesUnicas = array();
 
