@@ -1,10 +1,10 @@
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
 }
 
 body {
-    
+    font-family: 'Roboto', sans-serif;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -35,7 +35,7 @@ header {
 }
 
 header img {
-    max-width: 150px; 
+    max-width: 130px; /* 150 */
     height: auto;
     display: block; 
     margin: 0 auto;
@@ -44,10 +44,35 @@ header img {
 }
 
 .image {
-    max-width: 57px;
+    padding-top: 5px;
+    max-width: 40px; /* 57 */
     /* display: inline-block; */
     float: right;
     margin-right: 20px;
+    
+}
+
+.image:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do ícone em 10% */
+    transition: 0.5s;
+}
+
+.carrinho-link {
+    position: relative;
+    display: inline-block;
+    left: 1225px
+}
+
+.quantidade-no-carrinho {
+    position: absolute;
+    top: 6px;
+    right: 22px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 10px;
+    transform: translate(50%, -50%); 
 }
 
 
@@ -65,6 +90,7 @@ header img {
     margin: 10px;
     /*box-shadow*/
 }
+
 
 
 
@@ -94,7 +120,7 @@ text-align: center;
     color: darkgreen;
 }
 
-.card button {
+.card input {
     background-color: #49586f;
     height: 32px;
     border: none;
@@ -106,7 +132,7 @@ text-align: center;
     transition: background 0.3s;
 }
 
-.card button:hover {
+.card input:hover {
     background-color: #c0a8a8;
 }
 
@@ -144,6 +170,5 @@ text-align: center;
 }
 
 .session {
-    color: #fff;
-   
+    color: #fff
 }

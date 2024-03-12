@@ -46,14 +46,22 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
             //break;
         }
     }
-    unset($_GET['idProduto']);
-    unset($_GET['idApresentacao']);
 
     header('Location: http://localhost:8080/View/produtos_view.php');
 }
 
 
+if (isset($_SESSION['carrinho']['produtos'])) {
+    
+    $quantidade_produtos = 0;
 
+    foreach ($_SESSION['carrinho']['produtos'] as $produto) {
+        $quantidade_produtos += $produto->getQuantidade();
+    }
+
+} else {
+    $quantidade_produtos = 0;
+}
 
 ?>
 
@@ -64,6 +72,7 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="produto.css">
     <title>Produtos</title>
 </head>
@@ -83,8 +92,9 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
             <img class="image" src="/images/login.png" alt="login img">
         </a>
 
-        <a href="carrinho_view.php">
+        <a href="carrinho_view.php" class="carrinho-link">
             <img class="image" src="/images/cart.png" alt="cart img" >
+            <?php echo '<span class="quantidade-no-carrinho">' . $quantidade_produtos  . '</span>'; ?>
         </a>
     </header>
 
@@ -135,7 +145,7 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
                 echo '<h2>Detalhes do Ingresso</h2>';
                 foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
                     $idproduto = $apresentacoes['idproduto'];
-                    echo "<p>" . $apresentacoes['dscproduto'] . ": " . $apresentacoes['preco'] .  "</p>";
+                    echo "<p>" . $apresentacoes['dscproduto'] . ": R$" . $apresentacoes['preco'] .  "</p>";
                     echo "<button><a href='?idProduto=$idproduto&idApresentacao=$idapresentacao'>Adicionar</a></button>";
                 }
                 echo '</div>';

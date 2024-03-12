@@ -30,12 +30,23 @@ class Carrinho {
         $_SESSION['carrinho']['total'] += $produto->getPreco() * $produto->getQuantidade();
     }
 
-    public function remove(){
-
+    public function remove(string $idProduto){
+        if(isset($_SESSION['carrinho']['produtos'])) {
+            foreach ($this->getCarrinho() as $index => $produto) {
+                if($produto->getId() === $idProduto){
+                    unset($_SESSION['carrinho']['produtos'][$index]);
+                    $_SESSION['carrinho']['total'] -= $produto->getPreco() * $produto->getQuantidade();
+                }
+            } 
+        }
     }
 
     public function getCarrinho(){
         return $_SESSION['carrinho']['produtos'] ?? [];
+    }
+
+    public function getTotal() {
+        return $_SESSION['carrinho']['total'] ?? 0;
     }
 
 
