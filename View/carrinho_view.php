@@ -9,7 +9,6 @@ session_start();
 $carrinho = new Carrinho;
 $carrinhoItens = $carrinho->getCarrinho();
 
-var_dump($carrinhoItens);
 
 if (isset($carrinhoItens)) {
     
@@ -39,6 +38,7 @@ if (isset($_GET['idProduto'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="carrinho.css">
+    <link rel="icon" href="/images/ALico.ico" type="image/x-icon">
     <title>Carrinho</title>
 </head>
 <body>

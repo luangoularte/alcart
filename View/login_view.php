@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="/images/ALico.ico" type="image/x-icon">
         <title>Login</title>
     </head>
     <body>
@@ -29,7 +30,7 @@
                             <label for="email">Email</label>
                             <input type="text" name="email" id="email" required>
                             <label for="cpf">CPF</label>
-                            <input type="number" name="cpf" id="cpf" required>
+                            <input type="number" name="cpf" id="cpf" required style="-moz-appearance: textfield; -webkit-appearance: textfield;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
                             <div class='button-login'>
                                 <button type="submit" value="Login"><strong>Entrar</strong></button>
                             </div>
