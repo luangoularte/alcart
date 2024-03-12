@@ -98,23 +98,21 @@ if (isset($_SESSION['carrinho']['produtos'])) {
         </a>
     </header>
 
-    <div class='session'>
-            <?php var_dump($_SESSION['carrinho'] ?? []); ?>
-
-    </div>
-
     <div class="card-container">
         <?php 
             $total_cartoes = 8;
             $cartoes_por_linha = 4;
             $cartoes_exibidos = 0;
+
+            
+            
         
             foreach ($apresentacoesUnicas as $idapresentacao => $apresentacoes) {
                 $apresentacao = $apresentacoes[0]; 
 
                 echo '<div class="card">';
                 echo '<img src="' . $apresentacao['imagem_pequena'] . '" alt="Imagem da Apresentação">';
-                echo "<h1><strong>Nome:</strong> " . $apresentacao['dscapresentacao'] . "</h1>";
+                echo "<h1>" . $apresentacao['dscapresentacao'] . "</h1>";
                 echo "<h2><strong>Data:</strong> " . $apresentacao['dthr_apresentacao'] . "</h2>";
                 echo "<h2><strong>Cidade:</strong> " . $apresentacao['dsccidade'] . "</h2>";
 
@@ -146,7 +144,7 @@ if (isset($_SESSION['carrinho']['produtos'])) {
                 foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
                     $idproduto = $apresentacoes['idproduto'];
                     echo "<p>" . $apresentacoes['dscproduto'] . ": R$" . $apresentacoes['preco'] .  "</p>";
-                    echo "<button><a href='?idProduto=$idproduto&idApresentacao=$idapresentacao'>Adicionar</a></button>";
+                    echo "<a href='?idProduto=$idproduto&idApresentacao=$idapresentacao'><button>Adicionar</button></a>";
                 }
                 echo '</div>';
             }

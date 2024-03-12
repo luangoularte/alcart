@@ -40,7 +40,7 @@ header img {
 .carrinho-link {
     position: relative;
     display: inline-block;
-    left: 15300px;
+    left: 1530px;
 }
 
 .quantidade-no-carrinho {
@@ -53,4 +53,9 @@ header img {
     padding: 5px;
     font-size: 10px;
     transform: translate(50%, -50%); 
+}
+
+
+.carrinho {
+    padding-top: 50px;
 }
