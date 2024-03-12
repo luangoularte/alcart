@@ -92,10 +92,6 @@ if (isset($_SESSION['carrinho']['produtos'])) {
         <a href="login_view.php">
             <img class="image" src="/images/login_sair.png" alt="login sair img">
         </a>
-        
-        <a href="login_view.php">
-            <img class="image" src="/images/login.png" alt="login img">
-        </a>
 
         <a href="carrinho_view.php" class="carrinho-link">
             <img class="image" src="/images/cart.png" alt="cart img" >

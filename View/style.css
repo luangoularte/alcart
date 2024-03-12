@@ -49,6 +49,7 @@ body {
 .formulario-login {
     width: 75%;
     text-align: center;
+    
 }
 
 .form-login_view {
@@ -81,17 +82,23 @@ body {
 
 .form-login_view button {
     background-color: #49586f;
-    height: 32px;
+    height: 35px;
     border: none;
     border-radius: 4px;
     color: #141414;
     margin-top: 4px;
     margin-bottom: 4px;
     transition: background 0.3s;
+    width: 188px;
+    font-size: 16px;
 }
 
 .form-login_view button:hover {
     background-color: #c0a8a8;
+}
+
+.button-login {
+    padding-top: 10px;
 }
 
 .alert-success {
@@ -107,3 +114,4 @@ body {
         padding: 12px;
         color: #F4511E;
 }
+

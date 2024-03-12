@@ -30,7 +30,10 @@
                             <input type="text" name="email" id="email" required>
                             <label for="cpf">CPF</label>
                             <input type="number" name="cpf" id="cpf" required>
-                            <button type="submit" value="Login">Entrar</button>
+                            <div class='button-login'>
+                                <button type="submit" value="Login"><strong>Entrar</strong></button>
+                            </div>
+                            
                         </form>
 
                         <?php 
