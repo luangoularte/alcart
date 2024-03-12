@@ -1,10 +1,10 @@
 * {
-    margin: 0;
+    margin:0;
     padding: 0;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -60,7 +60,7 @@ header img {
 .carrinho-link {
     position: relative;
     display: inline-block;
-    left: 1225px
+    left: 1530px
 }
 
 .quantidade-no-carrinho {
@@ -75,25 +75,30 @@ header img {
     transform: translate(50%, -50%); 
 }
 
-
 .card-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; 
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .card {
     display: block;
     background-color: #fff;
-    /* height: 260px; */
     border-radius: 12px;
     width: calc(25% - 20px); 
     margin: 10px;
-    /*box-shadow*/
+    box-shadow: 0 4px 8px rgba(159, 162, 163, 0.1); 
+    text-align: center;
+    transition: transform 0.3s ease;
 }
 
-
-
-
+.card:hover {
+    transform: translateY(-5px);
+}
 
 .card img {
     width: 100%;
@@ -102,25 +107,22 @@ header img {
     border-top-right-radius: 12px;
 }
 
-
 .card div {
-display: flex;
-flex-direction: column;
-justify-content: center;
-text-align: center;
-
+    padding: 10px; 
 }
 
-.card h1{
-    font-size: .9rem;
+.card h2 {
+    margin-top: 0; 
 }
 
-.card h2{
-    font-size: .9rem;
-    color: darkgreen;
+.card p {
+    margin-bottom: 0; 
 }
 
-.card input {
+.card button {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer; 
     background-color: #49586f;
     height: 32px;
     border: none;
@@ -132,11 +134,9 @@ text-align: center;
     transition: background 0.3s;
 }
 
-.card input:hover {
+.card button:hover {
     background-color: #c0a8a8;
 }
-
-
 
 /* css caixa ingressos */
 
@@ -145,13 +145,14 @@ text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 24px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
+    padding: 40px;
     max-width: 400px;
     z-index: 999;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(91, 85, 85, 0.1);
 }
 
 .caixa-ingressos h2 {
@@ -162,13 +163,33 @@ text-align: center;
     margin-bottom: 5px;
 }
 
-.caixa-ingressos .fechar {
+.caixa-ingressos button {
+    cursor: pointer; 
+    font-size: 20px;
+    margin-bottom: 5px;
+    background-color: #75aca3;
+    height: 27px;
+    border: none;
+    border-radius: 4px;
+    width: 50%;
+    color: #141414;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transition: background 0.3s;
+}
+
+.caixa-ingressos button:hover {
+    background-color: #6f6565;
+}
+
+.close-btn {
     position: absolute;
     top: 5px;
-    right: 10px;
-    cursor: pointer;
+    left: 10px;
+    color: #c63535;
+    cursor: pointer; 
 }
 
 .session {
-    color: #fff
+    color: #fff; 
 }
