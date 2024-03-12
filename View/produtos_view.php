@@ -14,11 +14,16 @@ $apresentacoesUnicas = array();
 
 foreach ($apresentacoes['result'] as $apresentacao) {
     $id = $apresentacao['idapresentacao'];
-    if (!isset($apresentacoesUnicas[$id])) {
-        $apresentacoesUnicas[$id] = array(); 
-    }
 
-    $apresentacoesUnicas[$id][] = $apresentacao;
+    if ($apresentacao['dscapresentacao'] !== 'O Amor e Revolução') {
+        if ($apresentacao['dscapresentacao'] !== 'Teste Mercado Pago') {
+            if (!isset($apresentacoesUnicas[$id])) {
+                $apresentacoesUnicas[$id] = array(); 
+            }
+
+            $apresentacoesUnicas[$id][] = $apresentacao;
+        }
+    }
 }
 
 //var_dump($apresentacoesUnicas);
@@ -105,8 +110,6 @@ if (isset($_SESSION['carrinho']['produtos'])) {
             $cartoes_exibidos = 0;
 
             
-            
-        
             foreach ($apresentacoesUnicas as $idapresentacao => $apresentacoes) {
                 $apresentacao = $apresentacoes[0]; 
 
