@@ -138,6 +138,25 @@ header img {
     background-color: #c0a8a8;
 }
 
+.card input {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer; 
+    background-color: #49586f;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+    width: 80%;
+    color: #141414;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transition: background 0.3s;
+}
+
+.card input:hover {
+    background-color: #c0a8a8;
+}
+
 /* css caixa ingressos */
 
 .caixa-ingressos {
