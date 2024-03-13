@@ -37,7 +37,7 @@
                                 unset($_GET['falha_login']);
                             }
 
-                            var_dump($_SESSION);
+
                         ?>
 
                     </div>

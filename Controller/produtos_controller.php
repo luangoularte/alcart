@@ -48,7 +48,7 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['
             $produto = new Produto;
             $produto->setId($apresentacao['idproduto']);
             $produto->setDscproduto($apresentacao['dscproduto']);
-            $produto->setPreco(str_replace(',', '.', $apresentacao['preco']));
+            $produto->setPreco(str_replace(',', '.', (float) $apresentacao['preco']));
             $produto->setCidade($apresentacao['dsccidade']);
             $produto->setQuantidade($quantidade);
             $produto->setData($apresentacao['dthr_apresentacao']);

@@ -36,7 +36,6 @@ require __DIR__ . "/../Controller/produtos_controller.php";
         <?php 
             exibirApresentacoes();
             exibirIngressos();
-            var_dump($_SESSION);
         ?>       
     </div>
 </body>
