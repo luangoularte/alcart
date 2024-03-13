@@ -33,6 +33,7 @@ if (isset($_GET['limparCarrinho'])) {
 }
 
 function exibirCarrinho() {
+    global $carrinhoItens;
     global $carrinho;
     
     if (empty($carrinhoItens)) {
@@ -51,6 +52,7 @@ function exibirCarrinho() {
             echo "<p>Preço: R$" . $produto->getPreco() . "</p>";
             echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
             echo "<a href='?idProduto=" . $produto->getId() . "'>Remover</a>";
+            echo '</div>';
             echo '</div>';
         }
     
