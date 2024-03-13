@@ -42,7 +42,7 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['
             $produto->setCidade($apresentacao['dsccidade']);
             $produto->setQuantidade($quantidade);
             $produto->setData($apresentacao['dthr_apresentacao']);
-            $produto->setImagem($apresentacao['imagem_pequena']);
+            $produto->setImagem($apresentacao['imagem_grande']);
             $produto->setDscapresentacao($apresentacao['dscapresentacao']);
 
             $carrinho = new Carrinho;
@@ -78,7 +78,7 @@ function exibirApresentacoes() {
         $apresentacao = $apresentacoes[0]; 
 
         echo '<div class="card">';
-        echo '<img src="' . $apresentacao['imagem_pequena'] . '" alt="Imagem da Apresentação">';
+        echo '<img src="' . $apresentacao['imagem_grande'] . '" alt="Imagem da Apresentação">';
         echo "<h1>" . $apresentacao['dscapresentacao'] . "</h1>";
         echo "<h2><strong>Data:</strong> " . $apresentacao['dthr_apresentacao'] . "</h2>";
         echo "<h2><strong>Cidade:</strong> " . $apresentacao['dsccidade'] . "</h2>";
