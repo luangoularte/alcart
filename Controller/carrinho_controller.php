@@ -59,8 +59,8 @@ function exibirCarrinho() {
                     echo"<p>" . $produto->getCidade() . "</p>";
                     echo "<p>" . $produto->getDscproduto() . "</p>";
                     echo "<p>Quantidade: " . $produto->getQuantidade() . "</p>";
-                    echo "<p>Preço: R$" . $produto->getPreco() . "</p>";
-                    // echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
+                    echo "<p>Preço: R$" . number_format($produto->getPreco(), 2, ',', '.') . "</p>";
+                    echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
                     echo "<a href='?idProduto=" . $produto->getId() . "'><button>Remover</button></a>";
                 echo '</div>';
             echo '</div>';

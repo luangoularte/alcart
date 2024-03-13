@@ -44,11 +44,11 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['
     
     foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
         if ($apresentacao['idproduto'] === $idProduto) {
-
+            
             $produto = new Produto;
             $produto->setId($apresentacao['idproduto']);
             $produto->setDscproduto($apresentacao['dscproduto']);
-            $produto->setPreco($apresentacao['preco']);
+            $produto->setPreco(str_replace(',', '.', $apresentacao['preco']));
             $produto->setCidade($apresentacao['dsccidade']);
             $produto->setQuantidade($quantidade);
             $produto->setData($apresentacao['dthr_apresentacao']);
