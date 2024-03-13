@@ -1,4 +1,4 @@
-
+<?php session_start();?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,6 +36,8 @@
                                 echo "<p class='alert-error'>Falha ao realizar Login</p>";
                                 unset($_GET['falha_login']);
                             }
+
+                            var_dump($_SESSION);
                         ?>
 
                     </div>

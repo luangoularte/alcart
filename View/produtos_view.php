@@ -22,7 +22,7 @@ require __DIR__ . "/../Controller/produtos_controller.php";
             <img src="/images/ALlogo(3).png" alt="logo ALcart">
         </a>
         
-        <a href="login_view.php">
+        <a href="?sair=true">
             <img class="image" src="/images/login_sair.png" alt="login sair img">
         </a>
 
@@ -35,7 +35,8 @@ require __DIR__ . "/../Controller/produtos_controller.php";
     <div class="card-container">
         <?php 
             exibirApresentacoes();
-            exibirIngressos();  
+            exibirIngressos();
+            var_dump($_SESSION);
         ?>       
     </div>
 </body>

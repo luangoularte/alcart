@@ -25,6 +25,16 @@ foreach ($apresentacoes['result'] as $apresentacao) {
     }
 }
 
+if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
+    header('Location: login_view.php');
+}
+
+if (isset($_GET['sair'])) {
+    date_default_timezone_set('America/Sao_Paulo');
+    $_SESSION['saída_sessao'] = date("H:i:s");
+    session_unset();
+    header('Location: login_view.php');    
+}
 
 
 if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['quantidade'])) {
@@ -48,7 +58,6 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['
             $carrinho = new Carrinho;
             $carrinho->add($produto);
 
-            //break;
         }
     }
 

@@ -8,6 +8,16 @@ session_start();
 $carrinho = new Carrinho;
 $carrinhoItens = $carrinho->getCarrinho();
 
+if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
+    header('Location: login_view.php');
+}
+
+if (isset($_GET['sair'])) {
+    date_default_timezone_set('America/Sao_Paulo');
+    $_SESSION['saída_sessao'] = date("H:i:s");
+    session_unset();
+    header('Location: login_view.php');
+}
 
 if (isset($carrinhoItens)) {
     

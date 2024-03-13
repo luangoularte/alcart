@@ -21,7 +21,7 @@ require __DIR__ . "/../Controller/carrinho_controller.php";
             <img src="/images/ALlogo(3).png" alt="logo ALcart">
         </a>
         
-        <a href="login_view.php">
+        <a href="?sair=true">
             <img class="image" src="/images/login_sair.png" alt="login sair img">
         </a>
 
