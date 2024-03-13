@@ -1,4 +1,6 @@
-
+<?php 
+require __DIR__ . "/../Controller/login_controller.php";
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
