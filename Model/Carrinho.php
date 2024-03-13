@@ -43,6 +43,7 @@ class Carrinho {
 
     public function removerProdutos() {
         unset($_SESSION['carrinho']['produtos']);
+        $_SESSION['carrinho']['total'] = 0;
     }
 
     public function getCarrinho(){
