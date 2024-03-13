@@ -28,6 +28,11 @@ if (isset($_GET['idProduto'])) {
     header('Location: carrinho_view.php');
 }
 
+if (isset($_GET['limparCarrinho'])) {
+    $carrinho->removerProdutos();
+    header('Location: carrinho_view.php');
+}
+
 ?>
 
 
@@ -63,7 +68,6 @@ if (isset($_GET['idProduto'])) {
         <?php 
             if (empty($carrinhoItens)) {
                 echo '<h1>Carrinho vazio</h1>';
-                echo "<a href='produtos_view.php'>Voltar</a>";
             } else {
                 foreach ($carrinhoItens as $produto) {
                     echo '<div class="produto">';
@@ -82,8 +86,10 @@ if (isset($_GET['idProduto'])) {
                 }
             
                 echo "<p>Total: R$" . number_format($carrinho->getTotal(), 2, ',', '.') . "</p>";
-                echo "<button>Checkout</button>";
+                echo "<p><a href='?limparCarrinho=true'><button>Remover Produtos</button></a></p>";
+                echo "<button>Checkout</button></p>";
             }
+            echo "<p><a href='produtos_view.php'><button>Voltar</button></a></p>";
         ?>
     </div>
 </body>

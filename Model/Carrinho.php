@@ -41,6 +41,10 @@ class Carrinho {
         }
     }
 
+    public function removerProdutos() {
+        unset($_SESSION['carrinho']['produtos']);
+    }
+
     public function getCarrinho(){
         return $_SESSION['carrinho']['produtos'] ?? [];
     }

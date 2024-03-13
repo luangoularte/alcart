@@ -60,7 +60,7 @@ header img {
 .carrinho-link {
     position: relative;
     display: inline-block;
-    left: 1575px
+    left: 1575px;
 }
 
 .quantidade-no-carrinho {
@@ -80,7 +80,7 @@ header img {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding-top: 190px;
+    padding-top: 190px; 
     margin-left: 10%;
     margin-right: 10%;
 }
@@ -114,7 +114,7 @@ header img {
 
 .card h1 {
     margin-top: 0;
-    font-size: 25px;
+    font-size: 25px; 
 }
 
 .card h2 {
@@ -176,14 +176,13 @@ header img {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 40px;
-    max-width: 400px;
-    z-index: 999;
+    padding: 50px; 
+    z-index: 999; 
     box-shadow: 0 4px 8px rgba(91, 85, 85, 0.1);
 }
 
 .caixa-ingressos h2 {
-    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .caixa-ingressos p {
@@ -195,18 +194,28 @@ header img {
     font-size: 20px;
     margin-bottom: 5px;
     background-color: #75aca3;
-    height: 27px;
+    height: 40px;
     border: none;
     border-radius: 4px;
     width: 50%;
     color: #141414;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 10px;
+    margin-bottom: 30px;
     transition: background 0.3s;
+    width: 100%;
 }
 
 .caixa-ingressos button:hover {
     background-color: #6f6565;
+}
+
+#quantidade {
+    padding: 5px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda */
+    border-radius: 5px; /* Borda arredondada */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-left: 10px;
+    width: 61%;
 }
 
 .close-btn {
@@ -220,3 +229,4 @@ header img {
 .session {
     color: #fff; 
 }
+

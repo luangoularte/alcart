@@ -27,9 +27,10 @@ foreach ($apresentacoes['result'] as $apresentacao) {
 
 //var_dump($apresentacoesUnicas);
 
-if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
+if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['quantidade'])) {
     $idProduto = strip_tags($_GET['idProduto']);
     $idApresentacao = strip_tags($_GET['idApresentacao']);
+    $quantidade = strip_tags($_GET['quantidade']);
     
     foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
         if ($apresentacao['idproduto'] === $idProduto) {
@@ -39,7 +40,7 @@ if (isset($_GET['idProduto']) && isset($_GET['idApresentacao'])) {
             $produto->setDscproduto($apresentacao['dscproduto']);
             $produto->setPreco($apresentacao['preco']);
             $produto->setCidade($apresentacao['dsccidade']);
-            $produto->setQuantidade(1);
+            $produto->setQuantidade($quantidade);
             $produto->setData($apresentacao['dthr_apresentacao']);
             $produto->setImagem($apresentacao['imagem_pequena']);
             $produto->setDscapresentacao($apresentacao['dscapresentacao']);
@@ -142,8 +143,19 @@ if (isset($_SESSION['carrinho']['produtos'])) {
                 echo '<h2>Detalhes do Ingresso</h2>';
                 foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
                     $idproduto = $apresentacoes['idproduto'];
-                    echo "<p>" . $apresentacoes['dscproduto'] . ": R$" . $apresentacoes['preco'] .  "</p>";
-                    echo "<a href='?idProduto=$idproduto&idApresentacao=$idapresentacao'><button>Adicionar</button></a>";
+                    echo "<p>" . $apresentacoes['dscproduto'] . ": <strong>R$" . $apresentacoes['preco'] .  "</strong></p>";
+                    
+                    echo "<form method='get' action=''>";
+                    echo "<input type='hidden' name='idProduto' value='$idproduto'>";
+                    echo "<input type='hidden' name='idApresentacao' value='$idapresentacao'>";
+                    echo "<label for='quantidade'>Quantidade:</label>";
+                    echo "<select name='quantidade' id='quantidade'>";
+                    for ($i = 1; $i <= 10; $i++) {
+                        echo "<option value='$i'>$i</option>";
+                    }
+                    echo "</select>";
+                    echo "<button type='submit'>Adicionar</button>";
+                    echo "</form>";
                 }
                 echo '</div>';
             }
