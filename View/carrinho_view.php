@@ -1,6 +1,6 @@
 <?php 
 
-require __DIR__ . "/../Controller/produtos_controller.php";
+require __DIR__ . "/../Controller/carrinho_controller.php";
 
 ?>
 
