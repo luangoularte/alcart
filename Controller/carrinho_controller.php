@@ -41,24 +41,29 @@ function exibirCarrinho() {
     } else {
         foreach ($carrinhoItens as $produto) {
             echo '<div class="produto">';
-            echo '<div class="imagem">';
-            echo '<img src=" ' . $produto->getImagem() .'" alt="Imagem da Apresentação">';
+                echo '<div class="imagem">';
+                    echo '<img src=" ' . $produto->getImagem() .'" alt="Imagem da Apresentação">';
+                echo '</div>';
+                echo '<div class="informacoes">';
+                    echo "<p>" . $produto->getDscapresentacao() . "</p>";
+                    echo"<p>" . $produto->getCidade() . "</p>";
+                    echo "<p>" . $produto->getDscproduto() . "</p>";
+                    echo "<p>Quantidade: " . $produto->getQuantidade() . "</p>";
+                    echo "<p>Preço: R$" . $produto->getPreco() . "</p>";
+                    // echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
+                    echo "<a href='?idProduto=" . $produto->getId() . "'><button>Remover</button></a>";
+                echo '</div>';
             echo '</div>';
-            echo '<div class="informacoes">';
-            echo "<p>" . $produto->getDscapresentacao() . "</p>";
-            echo"<p>" . $produto->getCidade() . "</p>";
-            echo "<p>" . $produto->getDscproduto() . "</p>";
-            echo "<p>Quantidade: " . $produto->getQuantidade() . "</p>";
-            echo "<p>Preço: R$" . $produto->getPreco() . "</p>";
-            echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
-            echo "<a href='?idProduto=" . $produto->getId() . "'><button>Remover</button></a>";
-            echo '</div>';
-            echo '</div>';
+            echo "<br>";
         }
-    
-        echo "<p>Total: R$" . number_format($carrinho->getTotal(), 2, ',', '.') . "</p>";
-        echo "<p><a href='?limparCarrinho=true'><button>Remover Produtos</button></a></p>";
-        echo "<button>Checkout</button></p>";
+        echo '<div class="total">';
+            echo "<p class='esquerda'>Total: R$" . number_format($carrinho->getTotal(), 2, ',', '.') . "</p>";
+            echo '<div class="direita">';
+                echo "<p><a href='?limparCarrinho=true'><button>Remover Produtos</button></a></p>";
+                echo "<p><button>Checkout</button></p>";
+             echo '</div>';
+        echo '</div>';
+
     }
     echo "<p><a href='produtos_view.php'><button>Voltar</button></a></p>";
 }
