@@ -1,6 +1,4 @@
-<?php 
-require __DIR__ . "/../Controller/login_controller.php";
-?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,7 +20,7 @@ require __DIR__ . "/../Controller/login_controller.php";
                     <div class="formulario-login">
                         <img src="/images/ALlogo(3).png" alt="allogo" class="logo"></img>
             
-                        <form class="form-login_view" action="../Controller/login.php" method="post">
+                        <form class="form-login_view" action="../Controller/login_controller.php" method="post">
                             <label for="email">Email</label>
                             <input type="text" name="email" id="email" required>
                             <label for="cpf">CPF</label>
