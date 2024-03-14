@@ -7,8 +7,6 @@ require __DIR__ . "/../Model/Connect.php";
 
 session_start();
 
-$connect = new Connect();
-$connect = $connect->getConnection();
 
 $apresentacoes = (new APIcurl)->requisicaoProduto();
 $apresentacoesUnicas = array();
@@ -41,15 +39,9 @@ function redirecionarLogin() {
 
 
 function sair(){
-    global $connect;
-    
     if (isset($_GET['sair'])) {
-        $session_id = session_id();
         date_default_timezone_set('America/Sao_Paulo');
         $_SESSION['saida_sessao'] = date("H:i:s");
-        (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
-                                                    $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
-                                                    $_SESSION['carrinho'],$_SESSION['total'], $connect);
         session_unset();
         header('Location: login_view.php');
     }

@@ -1,5 +1,6 @@
 <?php 
 
+
 class Carrinho {
 
     public function add(Produto $produto){
@@ -53,6 +54,9 @@ class Carrinho {
         return $_SESSION['carrinho']['total'] ?? 0;
     }
 
+
 }
+
+
 
 ?>
