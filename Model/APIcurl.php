@@ -8,7 +8,7 @@ class APIcurl {
             "email" => $email,
             "cpf"   => $cpf
         ];
-
+        
 
         $url = "https://ah.we.imply.com/al/login";
 
