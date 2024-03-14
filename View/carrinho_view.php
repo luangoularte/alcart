@@ -6,7 +6,6 @@ require __DIR__ . "/../Controller/carrinho_controller.php";
 
 redirecionarLogin();
 sair();
-calcularQuantidadeCarrinho();
 removerProduto();
 limparCarrinho();
 
@@ -35,7 +34,7 @@ limparCarrinho();
 
         <a href="carrinho_view.php" class="carrinho-link">
             <img class="image" src="/images/cart.png" alt="cart img" >
-            <?php echo '<span class="quantidade-no-carrinho">' . $quantidade_produtos  . '</span>'; ?>
+            <?php echo '<span class="quantidade-no-carrinho">' . calcularQuantidadeCarrinho() . '</span>'; ?>
         </a>
     </header>
     

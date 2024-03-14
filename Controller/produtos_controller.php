@@ -119,11 +119,11 @@ function adicionarProdutoCarrinho($apresentacoesUnicas) {
         
         foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
             if ($apresentacao['idproduto'] === $idProduto) {
-                
+
                 $produto = new Produto;
                 $produto->setId($apresentacao['idproduto']);
                 $produto->setDscproduto($apresentacao['dscproduto']);
-                $produto->setPreco(str_replace(',', '.', (float) $apresentacao['preco']));
+                $produto->setPreco(str_replace(',', '.', $apresentacao['preco']));
                 $produto->setCidade($apresentacao['dsccidade']);
                 $produto->setQuantidade($quantidade);
                 $produto->setData($apresentacao['dthr_apresentacao']);

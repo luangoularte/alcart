@@ -92,7 +92,7 @@ body {
     width: 62%;
     margin: auto;
     box-shadow: rgba(62, 62, 62, 0.4) 5px 5px, rgba(188, 173, 183, 0.3) 10px 10px;
-    height: 200px;
+    height: 250px;
 }
  
  h1 {
@@ -155,10 +155,8 @@ body {
 }
 
 .but-direita {
-    /* bottom: 0;
+    bottom: 0;
     right: 0;
-    clear: both;
-    text-align: right;  */
     align-self: flex-end;
     margin-top: auto;
 }
@@ -172,11 +170,11 @@ margin: 20px; */
  button {
     background-color: #f05a52;
     font-family: Tahoma, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
-    height: 30px;
+    height: 40px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     color: #141414;
     margin-top: auto;
     margin-bottom: 4px;
@@ -239,4 +237,9 @@ margin: 20px; */
    margin: auto;
    box-shadow: rgba(62, 62, 62, 0.4) 5px 5px, rgba(188, 173, 183, 0.3) 10px 10px;
    height: 150px;
+}
+
+
+.btn-home {
+   text-align: center;
 }

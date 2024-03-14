@@ -27,6 +27,8 @@ function sair(){
 }
 
 function calcularQuantidadeCarrinho(){
+    global $carrinhoItens;
+
     if (isset($carrinhoItens)) {
         
         $quantidade_produtos = 0;
@@ -38,6 +40,8 @@ function calcularQuantidadeCarrinho(){
     } else {
         $quantidade_produtos = 0;
     }    
+
+    return $quantidade_produtos;
 }
 
 
@@ -69,6 +73,7 @@ function exibirCarrinho() {
         echo '<div class="vazio">';
             echo '<h1>Carrinho vazio!</h1>';
         echo '</div>';
+        echo "<p class='btn-home'><a href='produtos_view.php'><button>Voltar</button></a></p>";
     } else {
         foreach ($carrinhoItens as $produto) {
             echo '<div class="produto">';
@@ -100,7 +105,7 @@ function exibirCarrinho() {
                 echo "<p><button>Checkout</button></p>";
              echo '</div>';
         echo '</div>';
+        echo "<p class='btn-home'><a href='produtos_view.php'><button>Continuar comprando</button></a></p>";
 
     }
-    echo "<p><a href='produtos_view.php'><button>Voltar</button></a></p>";
 }
