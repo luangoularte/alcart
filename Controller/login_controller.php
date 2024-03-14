@@ -23,17 +23,16 @@ function iniciarSessao($email, $cpf) {
 }
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!empty($_POST['email']) && !empty($_POST['cpf'])){
 
-        $result = realizarLogin();
+if (!empty($_POST['email']) && !empty($_POST['cpf'])){
 
-        if (!empty($result['result'])) {
-            iniciarSessao($_POST['email'], $_POST['cpf']);
-            header('Location: ../View/produtos_view.php');
-        } else {
-            header('Location: ../View/login_view.php?falha_login=true');
-        }
+    $result = realizarLogin();
+
+    if (!empty($result['result'])) {
+        iniciarSessao($_POST['email'], $_POST['cpf']);
+        header('Location: ../View/produtos_view.php');
+    } else {
+        header('Location: ../View/login_view.php?falha_login=true');
     }
-
 }
+

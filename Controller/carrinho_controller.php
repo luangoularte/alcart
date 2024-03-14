@@ -5,6 +5,9 @@ require_once __DIR__ . "/../Model/Carrinho.php";
 
 session_start();
 
+$connect = new Connect();
+$connect = $connect->getConnection();
+
 $carrinho = new Carrinho;
 $carrinhoItens = $carrinho->getCarrinho();
 
@@ -13,8 +16,12 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
 }
 
 if (isset($_GET['sair'])) {
+    $session_id = session_id();
     date_default_timezone_set('America/Sao_Paulo');
-    $_SESSION['saída_sessao'] = date("H:i:s");
+    $_SESSION['saida_sessao'] = date("H:i:s");
+    $salvar = (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
+                                                $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
+                                                $_SESSION['carrinho'],$_SESSION['total'], $connect);
     session_unset();
     header('Location: login_view.php');
 }
