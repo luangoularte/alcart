@@ -2,6 +2,13 @@
 
 require __DIR__ . "/../Controller/produtos_controller.php";
 
+$apresentacoesUnicas = apresentacoesPorId();
+$carrinho = new Carrinho;
+
+adicionarProdutoCarrinho($apresentacoesUnicas, $carrinho);
+redirecionarLogin();
+sair();
+
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +35,14 @@ require __DIR__ . "/../Controller/produtos_controller.php";
 
         <a href="carrinho_view.php" class="carrinho-link">
             <img class="image" src="/images/cart.png" alt="cart img" >
-            <?php echo '<span class="quantidade-no-carrinho">' . $quantidade_produtos  . '</span>'; ?>
+            <?php echo '<span class="quantidade-no-carrinho">' . calcularQuantidade()  . '</span>'; ?>
         </a>
     </header>
 
     <div class="card-container">
         <?php 
-            exibirApresentacoes();
-            exibirIngressos();
+            exibirApresentacoes($apresentacoesUnicas);
+            exibirIngressos($apresentacoesUnicas);
         ?>       
     </div>
 </body>

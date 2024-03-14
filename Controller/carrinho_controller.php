@@ -2,6 +2,8 @@
 
 require_once __DIR__ . "/../Model/Produto.php";
 require_once __DIR__ . "/../Model/Carrinho.php";
+require __DIR__ . "/../Model/Connect.php";
+require __DIR__ . "/../Model/ArmazenaSessao.php";
 
 session_start();
 
@@ -11,43 +13,62 @@ $connect = $connect->getConnection();
 $carrinho = new Carrinho;
 $carrinhoItens = $carrinho->getCarrinho();
 
-if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
+function redirecionarLogin() {
+    if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
     header('Location: login_view.php');
-}
-
-if (isset($_GET['sair'])) {
-    $session_id = session_id();
-    date_default_timezone_set('America/Sao_Paulo');
-    $_SESSION['saida_sessao'] = date("H:i:s");
-    $salvar = (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
-                                                $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
-                                                $_SESSION['carrinho'],$_SESSION['total'], $connect);
-    session_unset();
-    header('Location: login_view.php');
-}
-
-if (isset($carrinhoItens)) {
-    
-    $quantidade_produtos = 0;
-
-    foreach ($carrinhoItens as $produto) {
-        $quantidade_produtos += $produto->getQuantidade();
     }
-
-} else {
-    $quantidade_produtos = 0;
 }
 
-if (isset($_GET['idProduto'])) {
-    $idProduto = strip_tags($_GET['idProduto']);
-    $carrinho->remove($idProduto);
-    header('Location: carrinho_view.php');
+
+function sair(){
+    global $connect;
+    
+    if (isset($_GET['sair'])) {
+        $session_id = session_id();
+        date_default_timezone_set('America/Sao_Paulo');
+        $_SESSION['saida_sessao'] = date("H:i:s");
+        (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
+                                                    $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
+                                                    $_SESSION['carrinho'],$_SESSION['total'], $connect);
+        session_unset();
+        header('Location: login_view.php');
+    }
 }
 
-if (isset($_GET['limparCarrinho'])) {
-    $carrinho->removerProdutos();
-    header('Location: carrinho_view.php');
+function calcularQuantidadeCarrinho(){
+    if (isset($carrinhoItens)) {
+        
+        $quantidade_produtos = 0;
+
+        foreach ($carrinhoItens as $produto) {
+            $quantidade_produtos += $produto->getQuantidade();
+        }
+
+    } else {
+        $quantidade_produtos = 0;
+    }    
 }
+
+
+function removerProduto() {
+    global $carrinho;
+
+    if (isset($_GET['idProduto'])) {
+        $idProduto = strip_tags($_GET['idProduto']);
+        $carrinho->remove($idProduto);
+        header('Location: carrinho_view.php');
+    }    
+}
+
+function limparCarrinho() {
+    global $carrinho;
+
+    if (isset($_GET['limparCarrinho'])) {
+        $carrinho->removerProdutos();
+        header('Location: carrinho_view.php');
+    }    
+}
+
 
 function exibirCarrinho() {
     global $carrinhoItens;

@@ -2,6 +2,13 @@
 
 require __DIR__ . "/../Controller/carrinho_controller.php";
 
+
+redirecionarLogin();
+sair();
+calcularQuantidadeCarrinho();
+removerProduto();
+limparCarrinho();
+
 ?>
 
 

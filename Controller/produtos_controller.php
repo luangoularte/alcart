@@ -3,6 +3,7 @@
 require __DIR__ . "/../Model/APIcurl.php";
 require __DIR__ . "/../Model/Carrinho.php";
 require __DIR__ . "/../Model/Produto.php";
+require __DIR__ . "/../Model/Connect.php";
 
 session_start();
 
@@ -12,82 +13,50 @@ $connect = $connect->getConnection();
 $apresentacoes = (new APIcurl)->requisicaoProduto();
 $apresentacoesUnicas = array();
 
+function apresentacoesPorId() {
+    global $apresentacoes;
 
-foreach ($apresentacoes['result'] as $apresentacao) {
-    $id = $apresentacao['idapresentacao'];
+    foreach ($apresentacoes['result'] as $apresentacao) {
+        $id = $apresentacao['idapresentacao'];
 
-    if ($apresentacao['dscapresentacao'] !== 'O Amor e Revolução') {
-        if ($apresentacao['dscapresentacao'] !== 'Teste Mercado Pago') {
-            if (!isset($apresentacoesUnicas[$id])) {
-                $apresentacoesUnicas[$id] = array(); 
+        if ($apresentacao['dscapresentacao'] !== 'O Amor e Revolução') {
+            if ($apresentacao['dscapresentacao'] !== 'Teste Mercado Pago') {
+                if (!isset($apresentacoesUnicas[$id])) {
+                    $apresentacoesUnicas[$id] = array(); 
+                }
+
+                $apresentacoesUnicas[$id][] = $apresentacao;
             }
-
-            $apresentacoesUnicas[$id][] = $apresentacao;
-        }
-    }
-}
-
-
-if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
-    header('Location: login_view.php');
-}
-
-
-if (isset($_GET['sair'])) {
-    $session_id = session_id();
-    date_default_timezone_set('America/Sao_Paulo');
-    $_SESSION['saida_sessao'] = date("H:i:s");
-    $salvar = (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
-                                                $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
-                                                $_SESSION['carrinho'],$_SESSION['total'], $connect);
-    session_unset();
-    header('Location: login_view.php');
-}
-
-
-if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['quantidade'])) {
-    $idProduto = strip_tags($_GET['idProduto']);
-    $idApresentacao = strip_tags($_GET['idApresentacao']);
-    $quantidade = strip_tags($_GET['quantidade']);
-    
-    foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
-        if ($apresentacao['idproduto'] === $idProduto) {
-            
-            $produto = new Produto;
-            $produto->setId($apresentacao['idproduto']);
-            $produto->setDscproduto($apresentacao['dscproduto']);
-            $produto->setPreco(str_replace(',', '.', (float) $apresentacao['preco']));
-            $produto->setCidade($apresentacao['dsccidade']);
-            $produto->setQuantidade($quantidade);
-            $produto->setData($apresentacao['dthr_apresentacao']);
-            $produto->setImagem($apresentacao['imagem_grande']);
-            $produto->setDscapresentacao($apresentacao['dscapresentacao']);
-
-            $carrinho = new Carrinho;
-            $carrinho->add($produto);
-
         }
     }
 
-    header('Location: http://localhost:8080/View/produtos_view.php');
+    return $apresentacoesUnicas;
 }
 
-
-if (isset($_SESSION['carrinho']['produtos'])) {
-    
-    $quantidade_produtos = 0;
-
-    foreach ($_SESSION['carrinho']['produtos'] as $produto) {
-        $quantidade_produtos += $produto->getQuantidade();
+function redirecionarLogin() {
+    if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
+    header('Location: login_view.php');
     }
-
-} else {
-    $quantidade_produtos = 0;
 }
 
 
-function exibirApresentacoes() {
-    global $apresentacoesUnicas;
+function sair(){
+    global $connect;
+    
+    if (isset($_GET['sair'])) {
+        $session_id = session_id();
+        date_default_timezone_set('America/Sao_Paulo');
+        $_SESSION['saida_sessao'] = date("H:i:s");
+        (new ArmazenaSessao)->armazenaSessao($session_id, $_SESSION['email'], $_SESSION['cpf'], 
+                                                    $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
+                                                    $_SESSION['carrinho'],$_SESSION['total'], $connect);
+        session_unset();
+        header('Location: login_view.php');
+    }
+}
+
+
+function exibirApresentacoes($apresentacoesUnicas) {
     $total_cartoes = 8;
     $cartoes_por_linha = 4;
     $cartoes_exibidos = 0;
@@ -121,8 +90,7 @@ function exibirApresentacoes() {
     }
 }
 
-function exibirIngressos() {
-    global $apresentacoesUnicas;
+function exibirIngressos($apresentacoesUnicas) {
 
     if (isset($_POST["comprar"])) {
         $idapresentacao = $_POST['idapresentacao'];
@@ -149,3 +117,53 @@ function exibirIngressos() {
         echo '</div>';
     }
 }
+
+
+function adicionarProdutoCarrinho($apresentacoesUnicas) {
+    
+    if (isset($_GET['idProduto']) && isset($_GET['idApresentacao']) && isset($_GET['quantidade'])) {
+        $idProduto = strip_tags($_GET['idProduto']);
+        $idApresentacao = strip_tags($_GET['idApresentacao']);
+        $quantidade = strip_tags($_GET['quantidade']);
+        
+        foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
+            if ($apresentacao['idproduto'] === $idProduto) {
+                
+                $produto = new Produto;
+                $produto->setId($apresentacao['idproduto']);
+                $produto->setDscproduto($apresentacao['dscproduto']);
+                $produto->setPreco(str_replace(',', '.', (float) $apresentacao['preco']));
+                $produto->setCidade($apresentacao['dsccidade']);
+                $produto->setQuantidade($quantidade);
+                $produto->setData($apresentacao['dthr_apresentacao']);
+                $produto->setImagem($apresentacao['imagem_grande']);
+                $produto->setDscapresentacao($apresentacao['dscapresentacao']);
+
+                $carrinho = new Carrinho;
+                $carrinho->add($produto);
+
+            }
+        }
+
+        header('Location: http://localhost:8080/View/produtos_view.php');
+    }
+}
+
+function calcularQuantidade() {
+    if (isset($_SESSION['carrinho']['produtos'])) {
+        
+        $quantidade_produtos = 0;
+
+        foreach ($_SESSION['carrinho']['produtos'] as $produto) {
+            $quantidade_produtos += $produto->getQuantidade();
+        }
+
+    } else {
+        $quantidade_produtos = 0;
+    }
+
+    return $quantidade_produtos;
+}
+
+
+
