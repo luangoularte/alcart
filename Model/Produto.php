@@ -3,7 +3,7 @@
 class Produto{
 
     private string $id;
-    private string $dscproduto; // inteira, meiaa
+    private string $dscproduto; // inteira, meia
     private string $preco;
     private string $cidade;
     private int $quantidade;

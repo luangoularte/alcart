@@ -4,10 +4,10 @@ class Connect
 {
 
     private $host = 'localhost';
-    private $port = '5432'; 
+    private $port = '5460'; 
     private $user = 'postgres';
     private $password = 'root';
-    private $database = 'desafio3';
+    private $database = 'desafio3all';
     
     protected $connection;
 
