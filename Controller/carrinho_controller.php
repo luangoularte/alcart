@@ -75,7 +75,9 @@ function exibirCarrinho() {
     global $carrinho;
     
     if (empty($carrinhoItens)) {
-        echo '<h1>Carrinho vazio</h1>';
+        echo '<div class="vazio">';
+            echo '<h1>Carrinho vazio!</h1>';
+        echo '</div>';
     } else {
         foreach ($carrinhoItens as $produto) {
             echo '<div class="produto">';
@@ -83,13 +85,19 @@ function exibirCarrinho() {
                     echo '<img src=" ' . $produto->getImagem() .'" alt="Imagem da Apresentação">';
                 echo '</div>';
                 echo '<div class="informacoes">';
-                    echo "<p>" . $produto->getDscapresentacao() . "</p>";
-                    echo"<p>" . $produto->getCidade() . "</p>";
-                    echo "<p>" . $produto->getDscproduto() . "</p>";
-                    echo "<p>Quantidade: " . $produto->getQuantidade() . "</p>";
-                    echo "<p>Preço: R$" . number_format($produto->getPreco(), 2, ',', '.') . "</p>";
-                    echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
-                    echo "<a href='?idProduto=" . $produto->getId() . "'><button>Remover</button></a>";
+                    echo '<div class="info-esquerda">';
+                        echo "<h1>" . $produto->getDscapresentacao() . "</h1>";
+                        echo"<p>Cidade: " . $produto->getCidade() . "</p>";
+                        echo "<p>Tipo: " . $produto->getDscproduto() . "</p>";
+                    echo '</div>';
+                    echo '<div class="info-direita">';
+                        echo "<p>Quantidade: " . $produto->getQuantidade() . "</p>";
+                        echo "<p>Preço: R$" . number_format($produto->getPreco(), 2, ',', '.') . "</p>";
+                        echo "<p>Subtotal: R$" . number_format($produto->getPreco() * $produto->getQuantidade(), 2, ',', '.') . "</p>";
+                        echo '<div class="but-direita">';
+                            echo "<a href='?idProduto=" . $produto->getId() . "'><button>Remover</button></a>";
+                        echo "</div>";
+                    echo "</div>";
                 echo '</div>';
             echo '</div>';
             echo "<br>";
