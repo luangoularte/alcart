@@ -3,7 +3,6 @@
 require __DIR__ . "/../Model/APIcurl.php";
 require __DIR__ . "/../Model/Carrinho.php";
 require __DIR__ . "/../Model/Produto.php";
-require __DIR__ . "/../Model/Connect.php";
 
 session_start();
 

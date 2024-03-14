@@ -2,8 +2,6 @@
 
 require_once __DIR__ . "/../Model/Produto.php";
 require_once __DIR__ . "/../Model/Carrinho.php";
-require __DIR__ . "/../Model/Connect.php";
-require __DIR__ . "/../Model/ArmazenaSessao.php";
 
 session_start();
 
