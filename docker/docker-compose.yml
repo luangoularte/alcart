@@ -1,24 +1,25 @@
+version: '3.8'
+
 services:
   php:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
-      - "3605:80"
+      - "3601:80"
       - "443:443"
     volumes:
       - .:/var/www/html
-    links: 
+    links:
       - postgres
+
   postgres:
     image: postgres:latest
-    container_name: desafio3all
+    container_name: des
     restart: always
     environment:
-      POSTGRES_NAME: postgres
+      POSTGRES_DB: desafio3
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
     ports:
-      - "3604:5460"
-    
-#docker compose up -d  docker compose stop e docker compose down
+      - "5432:5432"

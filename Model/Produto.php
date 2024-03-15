@@ -75,10 +75,6 @@ class Produto{
         return $this->dscapresentacao;
     }
 
-
-
 }
-
-
 
 ?>

@@ -1,17 +1,19 @@
 <?php 
 
-
 class Carrinho {
 
     public function add(Produto $produto){
         $NoCarrinho = false;
         $this->setTotal($produto);
+
         if (count($this->getCarrinho()) > 0) {
             foreach ($this->getCarrinho() as $produtoNoCarrinho) {
                 if ($produtoNoCarrinho->getId() === $produto->getId()){
+
                     $quantidade = $produtoNoCarrinho->getQuantidade() + $produto->getQuantidade();
                     $produtoNoCarrinho->setQuantidade($quantidade);
                     $NoCarrinho = true;
+
                     break;
                 }
             }
@@ -53,10 +55,7 @@ class Carrinho {
     public function getTotal() {
         return $_SESSION['carrinho']['total'] ?? 0;
     }
-
-
+    
 }
-
-
 
 ?>

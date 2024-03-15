@@ -9,7 +9,6 @@ class APIcurl {
             "cpf"   => $cpf
         ];
 
-
         $url = "https://ah.we.imply.com/al/login";
 
         $curl = curl_init($url);
@@ -20,7 +19,6 @@ class APIcurl {
             CURLOPT_POST => true, 
             CURLOPT_POSTFIELDS => json_encode($dados))
         );
-
 
         $response = curl_exec($curl);
 
@@ -37,7 +35,7 @@ class APIcurl {
 
         $curl = curl_init($url);
 
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//erro com o SSL
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($curl);
@@ -49,9 +47,6 @@ class APIcurl {
         return $decoded;
     }
 }
-
-//$teste = (new APIcurl)->requisicaoProduto();
-//var_dump($teste);
 
 ?>
 
