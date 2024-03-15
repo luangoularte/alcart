@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',  Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -44,13 +44,15 @@ header img {
 
 .image {
     padding-top: 5px;
-    max-width: 40px; 
+    max-width: 40px; /* 57 */
+    /* display: inline-block; */
     float: right;
     margin-right: 30px;
+    
 }
 
 .image:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Aumenta o tamanho do ícone em 10% */
     transition: 0.5s;
 }
 
@@ -205,10 +207,10 @@ header img {
 }
 
 #quantidade {
-    padding: 5px;
-    border: 1px solid #ccc; 
+    padding: 5px; 
+    border: 1px solid #ccc;
     border-radius: 5px; 
-    font-size: 16px;
+    font-size: 16px; 
     margin-left: 10px;
     width: 61%;
 }

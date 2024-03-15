@@ -3,9 +3,13 @@
 require __DIR__ . "/../Model/APIcurl.php";
 require __DIR__ . "/../Model/Carrinho.php";
 require __DIR__ . "/../Model/Produto.php";
+require __DIR__ . "/../Model/Connect.php";
+require __DIR__ . "/../Model/ArmazenaSessao.php";
 
 session_start();
 
+$connect = new Connect();
+$connect = $connect->getConnection();
 
 $apresentacoes = (new APIcurl)->requisicaoProduto();
 $apresentacoesUnicas = array();
@@ -32,20 +36,23 @@ function apresentacoesPorId() {
 
 function redirecionarLogin() {
     if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
-    header('Location: login_view.php');
-    }
-}
-
-
-function sair(){
-    if (isset($_GET['sair'])) {
-        date_default_timezone_set('America/Sao_Paulo');
-        $_SESSION['saida_sessao'] = date("H:i:s");
-        session_unset();
         header('Location: login_view.php');
     }
 }
 
+function sair(){
+    global $connect;
+    
+    if (isset($_GET['sair'])) {
+        date_default_timezone_set('America/Sao_Paulo');
+        $_SESSION['saida_sessao'] = date("H:i:s");
+        (new ArmazenaSessao)->armazenaSessao($_SESSION['email'], $_SESSION['cpf'], 
+                                            $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
+                                            $_SESSION['carrinho']['produtos'],$_SESSION['carrinho']['total'], $connect);
+        session_unset();
+        header('Location: login_view.php');
+    }
+}
 
 function exibirApresentacoes($apresentacoesUnicas) {
     $total_cartoes = 8;
@@ -56,17 +63,16 @@ function exibirApresentacoes($apresentacoesUnicas) {
         $apresentacao = $apresentacoes[0]; 
 
         echo '<div class="card">';
-        echo '<img src="' . $apresentacao['imagem_grande'] . '" alt="Imagem da Apresentação">';
-        echo "<h1>" . $apresentacao['dscapresentacao'] . "</h1>";
-        echo "<h2><strong>Data:</strong> " . $apresentacao['dthr_apresentacao'] . "</h2>";
-        echo "<h2><strong>Cidade:</strong> " . $apresentacao['dsccidade'] . "</h2>";
+            echo '<img src="' . $apresentacao['imagem_grande'] . '" alt="Imagem da Apresentação">';
+            
+            echo "<h1>" . $apresentacao['dscapresentacao'] . "</h1>";
+            echo "<h2><strong>Data:</strong> " . $apresentacao['dthr_apresentacao'] . "</h2>";
+            echo "<h2><strong>Cidade:</strong> " . $apresentacao['dsccidade'] . "</h2>";
 
-        echo '<form action="" method="post">';
-        echo '<input type="hidden" name="idapresentacao" value="'. $idapresentacao .'">';
-        echo '<input type="submit" name="comprar" value="Comprar">';
-        echo '</form>';
-        
-
+            echo '<form action="" method="post">';
+                echo '<input type="hidden" name="idapresentacao" value="'. $idapresentacao .'">';
+                echo '<input type="submit" name="comprar" value="Comprar">';
+            echo '</form>';
         echo '</div>';
 
         $cartoes_exibidos++;
@@ -87,28 +93,31 @@ function exibirIngressos($apresentacoesUnicas) {
         $idapresentacao = $_POST['idapresentacao'];
 
         echo '<div class="caixa-ingressos">';
-        echo '<span class="close-btn" onclick="this.parentElement.style.display=\'none\'">&times;</span>';
-        echo '<h2>Detalhes do Ingresso</h2>';
-        foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
-            $idproduto = $apresentacoes['idproduto'];
-            echo "<p>" . $apresentacoes['dscproduto'] . ": <strong>R$" . $apresentacoes['preco'] .  "</strong></p>";
-            
-            echo "<form method='get' action=''>";
-            echo "<input type='hidden' name='idProduto' value='$idproduto'>";
-            echo "<input type='hidden' name='idApresentacao' value='$idapresentacao'>";
-            echo "<label for='quantidade'>Quantidade:</label>";
-            echo "<select name='quantidade' id='quantidade'>";
-            for ($i = 1; $i <= 10; $i++) {
-                echo "<option value='$i'>$i</option>";
+            echo '<span class="close-btn" onclick="this.parentElement.style.display=\'none\'">&times;</span>';
+            echo '<h2>Detalhes do Ingresso</h2>';
+
+            foreach ($apresentacoesUnicas[$idapresentacao] as $apresentacoes) {
+                $idproduto = $apresentacoes['idproduto'];
+
+                echo "<p>" . $apresentacoes['dscproduto'] . ": <strong>R$" . $apresentacoes['preco'] .  "</strong></p>";
+                
+                echo "<form method='get' action=''>";
+                    echo "<input type='hidden' name='idProduto' value='$idproduto'>";
+                    echo "<input type='hidden' name='idApresentacao' value='$idapresentacao'>";
+                    echo "<label for='quantidade'>Quantidade:</label>";
+
+                    echo "<select name='quantidade' id='quantidade'>";
+                        for ($i = 1; $i <= 10; $i++) {
+                            echo "<option value='$i'>$i</option>";
+                        }   
+                    echo "</select>";
+
+                    echo "<button type='submit'>Adicionar</button>";
+                echo "</form>";
             }
-            echo "</select>";
-            echo "<button type='submit'>Adicionar</button>";
-            echo "</form>";
-        }
         echo '</div>';
     }
 }
-
 
 function adicionarProdutoCarrinho($apresentacoesUnicas) {
     
@@ -119,7 +128,7 @@ function adicionarProdutoCarrinho($apresentacoesUnicas) {
         
         foreach ($apresentacoesUnicas[$idApresentacao] as $apresentacao) {
             if ($apresentacao['idproduto'] === $idProduto) {
-
+                
                 $produto = new Produto;
                 $produto->setId($apresentacao['idproduto']);
                 $produto->setDscproduto($apresentacao['dscproduto']);
@@ -155,6 +164,3 @@ function calcularQuantidade() {
 
     return $quantidade_produtos;
 }
-
-
-

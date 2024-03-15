@@ -1,19 +1,20 @@
 <?php 
 
-
 class ArmazenaSessao {
 
-
-    public function armazenaSessao($session_id, $email, $cpf, $entrada_sessao, $saida_sessao, $carrinho, $total, $connect) {
+    public function armazenaSessao($email, $cpf, $entrada_sessao, $saida_sessao, $carrinho, $total, $connect) {
         try {
-            $stmt = $connect->prepare("INSERT INTO sessions (session_id, email, cpf, entrada_sessao, saida_sessao, carrinho, total) VALUES (:session_id, :email, :cpf, :entrada_sessao, :saida_sessao, :carrinho, :total)");
+
+            $carrinho_serializado = serialize($carrinho);
+
+            $stmt = $connect->prepare("INSERT INTO sessions (email, cpf, entrada_sessao, saida_sessao, carrinho, total) VALUES (:email, :cpf, :entrada_sessao, :saida_sessao, :carrinho, :total)");
     
-            $stmt->bindParam(':session_id', $session_id);
+            
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':cpf', $cpf);
             $stmt->bindParam(':entrada_sessao', $entrada_sessao);
             $stmt->bindParam(':saida_sessao', $saida_sessao);
-            $stmt->bindParam(':carrinho', $carrinho);
+            $stmt->bindParam(':carrinho', $carrinho_serializado);
             $stmt->bindParam(':total', $total);
     
             $stmt->execute();

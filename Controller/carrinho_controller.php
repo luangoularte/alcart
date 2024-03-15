@@ -2,15 +2,20 @@
 
 require_once __DIR__ . "/../Model/Produto.php";
 require_once __DIR__ . "/../Model/Carrinho.php";
+require __DIR__ . "/../Model/Connect.php";
+require __DIR__ . "/../Model/ArmazenaSessao.php";
 
 session_start();
+
+$connect = new Connect();
+$connect = $connect->getConnection();
 
 $carrinho = new Carrinho;
 $carrinhoItens = $carrinho->getCarrinho();
 
 function redirecionarLogin() {
     if (!isset($_SESSION['email']) || !isset($_SESSION['cpf'])) {
-    header('Location: login_view.php');
+        header('Location: login_view.php');
     }
 }
 
@@ -21,6 +26,9 @@ function sair(){
     if (isset($_GET['sair'])) {
         date_default_timezone_set('America/Sao_Paulo');
         $_SESSION['saida_sessao'] = date("H:i:s");
+        (new ArmazenaSessao)->armazenaSessao($_SESSION['email'], $_SESSION['cpf'], 
+                                            $_SESSION['entrada_sessao'], $_SESSION['saida_sessao'], 
+                                            $_SESSION['carrinho']['produtos'],$_SESSION['carrinho']['total'], $connect);
         session_unset();
         header('Location: login_view.php');
     }
@@ -97,7 +105,8 @@ function exibirCarrinho() {
                 echo '</div>';
             echo '</div>';
             echo "<br>";
-        }
+        }      
+
         echo '<div class="total">';
             echo "<p class='esquerda'>Total: R$" . number_format($carrinho->getTotal(), 2, ',', '.') . "</p>";
             echo '<div class="direita">';
@@ -106,6 +115,5 @@ function exibirCarrinho() {
              echo '</div>';
         echo '</div>';
         echo "<p class='btn-home'><a href='produtos_view.php'><button>Continuar comprando</button></a></p>";
-
     }
 }
