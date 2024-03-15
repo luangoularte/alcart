@@ -4,7 +4,6 @@ require __DIR__ . "/../Model/APIcurl.php";
 
 session_start();
 
-
 function realizarLogin() {
     $email = $_POST['email'];
     $cpf = $_POST['cpf'];
@@ -21,8 +20,6 @@ function iniciarSessao($email, $cpf) {
     $_SESSION['cpf'] = $cpfCriptografado;
     $_SESSION['entrada_sessao'] = date("H:i:s");
 }
-
-
 
 if (!empty($_POST['email']) && !empty($_POST['cpf'])){
 
